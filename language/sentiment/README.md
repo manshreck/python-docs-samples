@@ -2,7 +2,7 @@
 
 This sample contains the code referenced in the 
 [Sentiment Analysis Tutorial](http://cloud.google.com/natural-language/docs/sentiment-tutorial)
-within the Natural Language API Documentation. A full walkthrough of this sample
+within the Google Cloud Natural Language API Documentation. A full walkthrough of this sample
 is located within the documentation.
 
 This sample is a simple illustration of how to construct a sentiment analysis
@@ -11,7 +11,7 @@ request and process a response using the API.
 ## Download the Code
 
 ```
-git clone sso://python-dev-samples/language/sentiment/
+git clone https://github.com/GoogleCloudPlatform/python-dev-samples/language/sentiment/
 ```
 
 ### Usage

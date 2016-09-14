@@ -38,18 +38,18 @@ def main(movie_review_filename):
         )
         response = service_request.execute()
 
-    try:
-        polarity = response['documentSentiment']['polarity']
-        magnitude = response['documentSentiment']['magnitude']
-    except KeyError:
-        print("The response did not contain the expected fields.")
+    polarity = response['documentSentiment']['polarity']
+    magnitude = response['documentSentiment']['magnitude']
+
     print('Sentiment: polarity of %s with magnitude of %s'
           % (polarity, magnitude))
     return 0
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument(
         'movie_review_filename',
         help='The filename of the movie review you\'d like to analyze.')
