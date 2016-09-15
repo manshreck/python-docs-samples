@@ -39,7 +39,8 @@ def main(movie_review_filename):
     polarity = response['documentSentiment']['polarity']
     magnitude = response['documentSentiment']['magnitude']
 
-    print('Sentiment: polarity of {} with magnitude of {}'.format(polarity, magnitude))
+    print('Sentiment: polarity of {} with magnitude of {}'.format(
+        polarity, magnitude))
     return 0
 
 
