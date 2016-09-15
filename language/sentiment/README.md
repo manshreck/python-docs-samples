@@ -8,10 +8,32 @@ is located within the documentation.
 This sample is a simple illustration of how to construct a sentiment analysis
 request and process a response using the API.
 
+## Prerequisites
+
+1. Install the [Google Cloud SDK](https://cloud.google.com/sdk/), including the [gcloud tool](https://cloud.google.com/sdk/gcloud/), and [gcloud app component](https://cloud.google.com/sdk/gcloud-app).
+
+2. Setup the gcloud tool. This provides authentication to Google Cloud APIs and services.
+
+```
+$ gcloud init
+```
+
+
 ## Download the Code
 
 ```
-git clone https://github.com/GoogleCloudPlatform/python-dev-samples/language/sentiment/
+$ git clone https://github.com/GoogleCloudPlatform/python-dev-samples/language/sentiment/
+$ cd python-docs-samples/language/sentiment
+```
+
+## Run the Code
+
+Open a sample folder, create a virtualenv, install dependencies, and run the sample:
+
+```
+$ virtualenv env
+$ source env/bin/activate
+(env)$ pip install -r requirements.txt
 ```
 
 ### Usage
@@ -21,7 +43,6 @@ provide to the sample on the command line. (You can also
 pass your own text files.)
 
 ```
-$ python sentiment_analysis.py textfile.txt
+(env)$ python sentiment_analysis.py textfile.txt
 Sentiment: polarity of -0.1 with magnitude of 6.7
 ```
-
