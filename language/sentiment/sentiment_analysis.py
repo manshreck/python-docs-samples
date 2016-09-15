@@ -11,21 +11,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+'''Demonstrates how to make a simple call to the Natural Language API'''
+
 import argparse
 from googleapiclient import discovery
-import httplib2
 from oauth2client.client import GoogleCredentials
 
 
 def main(movie_review_filename):
     '''Run a sentiment analysis request on text within a passed filename.'''
 
-    credentials = GoogleCredentials.get_application_default().create_scoped(
-        ['https://www.googleapis.com/auth/cloud-platform'])
-    http = httplib2.Http()
-    credentials.authorize(http)
-
-    service = discovery.build('language', 'v1beta1', http=http)
+    credentials = GoogleCredentials.get_application_default()
+    service = discovery.build('language', 'v1beta1', credentials=credentials)
 
     with open(movie_review_filename, 'r') as review_file:
         service_request = service.documents().analyzeSentiment(
@@ -38,18 +35,18 @@ def main(movie_review_filename):
         )
         response = service_request.execute()
 
-    try:
-        polarity = response['documentSentiment']['polarity']
-        magnitude = response['documentSentiment']['magnitude']
-    except KeyError:
-        print("The response did not contain the expected fields.")
-    print('Sentiment: polarity of %s with magnitude of %s'
-          % (polarity, magnitude))
+    polarity = response['documentSentiment']['polarity']
+    magnitude = response['documentSentiment']['magnitude']
+
+    print('Sentiment: polarity of {} with magnitude of {}'.format(
+        polarity, magnitude))
     return 0
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument(
         'movie_review_filename',
         help='The filename of the movie review you\'d like to analyze.')
