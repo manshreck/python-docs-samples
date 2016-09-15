@@ -20,12 +20,8 @@ from oauth2client.client import GoogleCredentials
 def main(movie_review_filename):
     '''Run a sentiment analysis request on text within a passed filename.'''
 
-    credentials = GoogleCredentials.get_application_default().create_scoped(
-        ['https://www.googleapis.com/auth/cloud-platform'])
-    http = httplib2.Http()
-    credentials.authorize(http)
-
-    service = discovery.build('language', 'v1beta1', http=http)
+    credentials = GoogleCredentials.get_application_default()
+    service = discovery.build('language', 'v1beta1', credentials=credentials)
 
     with open(movie_review_filename, 'r') as review_file:
         service_request = service.documents().analyzeSentiment(
