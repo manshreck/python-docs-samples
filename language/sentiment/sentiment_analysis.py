@@ -11,6 +11,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+'''Demonstrates how to make a simple call to the Natural Language API'''
+
 import argparse
 from googleapiclient import discovery
 import httplib2
