@@ -13,17 +13,21 @@
 
 '''Demonstrates how to make a simple call to the Natural Language API'''
 
+# [START import_libraries]
 import argparse
 from googleapiclient import discovery
 from oauth2client.client import GoogleCredentials
-
+# [END import_libraries]
 
 def main(movie_review_filename):
     '''Run a sentiment analysis request on text within a passed filename.'''
 
+    # [START authenticate]
     credentials = GoogleCredentials.get_application_default()
     service = discovery.build('language', 'v1beta1', credentials=credentials)
+    # [END authenticate]
 
+    # [START construct_request]
     with open(movie_review_filename, 'r') as review_file:
         service_request = service.documents().analyzeSentiment(
             body={
@@ -33,16 +37,19 @@ def main(movie_review_filename):
                 }
             }
         )
+        # [END construct_request]
+        # [START parse_response]
         response = service_request.execute()
 
-    polarity = response['documentSentiment']['polarity']
-    magnitude = response['documentSentiment']['magnitude']
+        polarity = response['documentSentiment']['polarity']
+        magnitude = response['documentSentiment']['magnitude']
 
-    print('Sentiment: polarity of {} with magnitude of {}'.format(
-        polarity, magnitude))
+        print('Sentiment: polarity of {} with magnitude of {}'.format(
+            polarity, magnitude))
+        # [END parse_response]
     return 0
 
-
+# [START run_application]
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description=__doc__,
@@ -52,3 +59,4 @@ if __name__ == '__main__':
         help='The filename of the movie review you\'d like to analyze.')
     args = parser.parse_args()
     main(args.movie_review_filename)
+# [END run_application]
